@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Api Request</title>
+    <style>
+        :root {
+            --card-w: 320px;
+            --accent: #4f46e5;
+            --muted: #6b7280;
+            --bg: #9d9ea0;
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--bg);
+            font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+        }
+
+        .card {
+            width: var(--card-w);
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+            padding: 20px;
+            text-align: center;
+            display: none;
+        }
+
+        .avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin: 0 auto 12px;
+            border: 4px solid #fff;
+            box-shadow: 0 6px 18px rgba(79, 70, 229, 0.12);
+        }
+
+        .avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        h2 {
+            margin: 8px 0 4px;
+            font-size: 1.25rem;
+            line-height: 1;
+        }
+
+        .role {
+            margin: 0;
+            color: var(--muted);
+            font-size: 0.95rem;
+        }
+
+        .info {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 12px;
+            color: var(--muted);
+            font-size: 0.9rem;
+        }
+
+        .info-item {
+            background: #f9fafb;
+            padding: 8px 12px;
+            border-radius: 8px;
+        }
+
+        .info-item strong {
+            display: block;
+            font-size: 1rem;
+            color: #111
+        }
+
+        @media (max-width:380px) {
+            .card {
+                width: 92%;
+                padding: 16px
+            }
+
+            .avatar {
+                width: 96px;
+                height: 96px
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <form>
+        <label for="text">Enter the name</label><input type="text" id="text">
+        <input type="submit" id="sub">
+    </form>
+    <div class="card">
+        <div class="avatar">
+            <img src="https://via.placeholder.com/300" alt="avatar">
+        </div>
+        <h2 id="name">John Doe</h2>
+        <p class="role">Frontend Developer</p>
+        <div class="info">
+            <p>this is the info</p>
+        </div>
+    </div>
+</body>
+<script>
+    let ApiUrl = 'https://api.github.com/users/hiteshchoudhary'
+    let image = document.querySelector('img')
+    let name = document.querySelector('#name')
+    let role = document.querySelector('.role')
+    let info = document.querySelector('.info')
+    let form = document.querySelector('form')
+    let text = document.querySelector('#text')
+    let submit = document.querySelector('#sub')
+    let card = document.querySelector('.card')
+
+    let xhrData = new XMLHttpRequest()
+
+    // console.log(typeof data)
+    xhrData.open('GET', ApiUrl)
+    // console.log('here')
+    // console.log(xhrData.readyState)
+    // if we want to track the status so we use onreadyStatechange
+    form.addEventListener('submit', function (e) {
+        e.preventDefault()
+        let username=text.value.toLowerCase()
+        console.log(username)
+        if (username === 'hitesh' || username === 'chaiorcode') {
+            xhrData.onreadystatechange = function () {
+                console.log(xhrData.readyState)
+                if (xhrData.readyState === 4) {
+                    // console.log(this.responseText)
+                    
+                    let objData = JSON.parse(this.responseText)
+                    console.log(objData)
+                    card.style.display='block'
+                    image.src = objData.avatar_url || image.src
+                    // console.log(objData.avatar_url)
+                    name.innerHTML = objData.name || 'no name'
+                    role.innerHTML = objData.twitter_username || 'no twitter name'
+                    info.firstElementChild.innerHTML = objData.bio
+
+
+                }
+
+            }
+             xhrData.send()
+        }
+    })
+
+
+   
+
+
+</script>
+
+</html>

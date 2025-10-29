@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>async.js</title>
+</head>
+<body>
+    <h1>This Tutorial is About Async js</h1>
+    <button id="id">Start</button>
+    <button id="secbtn">stop</button>
+</body>
+<script>
+    // let fun=function(){
+    //     document.querySelector('h1').innerHTML='this is change the async'
+    // }
+    // let set= setTimeout(fun ,3000);
+    // let btn=document.getElementById('id')
+    // btn.addEventListener('click',function () {
+    //     clearTimeout(set)
+    //     console.log('cleartimout clicked')
+        
+    // })
+    let strbtn=document.getElementById('id')
+    let stop=document.getElementById('secbtn')
+    let Start=function(name){
+        console.log(`Hi today date is ${new Date().getSeconds()} ${name}`)
+    }
+
+    let setint;
+    strbtn.addEventListener('click',function () {
+        setint= setInterval(Start,3000,'Hasnain');
+        console.log('intervel start')
+    })
+    
+    stop.addEventListener('click',function () {
+        clearInterval(setint)
+        console.log('intervel stop')
+        
+    })
+
+</script>
+</html>

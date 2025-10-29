@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            background-color: black;
+            color: white;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        .container{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-size: 50px;
+            flex-direction: column;
+            gap: 20px;
+        }
+        #time{
+            border: 2px solid white;
+            padding: 20px;
+            border-radius: 10px;
+            background-color: rgb(217, 236, 38);
+            color: black;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="banner">Your local Time</div>
+        <div id="time"></div>
+    </div>
+</body>
+<script>
+    let time=document.getElementById('time');
+    // let date = new Date();
+    // console.log(date);
+    // let newdate=date.toLocaleTimeString();
+    // console.log(newdate);
+    // time.innerHTML=newdate;
+    setInterval(()=>{
+        let date = new Date();
+        time.innerHTML=date.toLocaleTimeString();
+    },1000)
+</script>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Change the Background Color</title>
+
+</head>
+<body>
+    <h1>Start should change the Background color every second</h1>
+    <button id="start">Start</button>
+    <button id="stop">Stop</button>
+</body>
+<script>
+    let body= document.querySelector('body');
+    let start=document.getElementById('start');
+    let stop=document.getElementById('stop');
+    let h1=document.querySelector('h1');
+    let randomColor=function() {
+        // first we will take hex value that start from to 9        
+        let hex='0123456789ABCDEF'
+        let color='#'
+        for(let i=0; i<6; i++){
+            color+=hex[Math.floor(Math.random()*16) 
+            ]
+        }
+        return color;
+    }
+    // console.log(randomColor());
+    let starter= function() {
+        body.style.backgroundColor=randomColor();
+        h1.style.color=randomColor();
+    }
+    let setint;
+   start.addEventListener('click',function(){
+    // i want when the value of setint is null or undefined only then start the interval this is only the best practice to avoid multiple intervals on multiple clicks
+    // if(!setint){
+    //     setint=setInterval(starter,1000);
+    // }
+    //
+     setint=setInterval(starter,1000);
+     console.log('interval started');
+   })
+   stop.addEventListener('click',function(){
+    clearInterval(setint);
+    // we can also set setint to null after clearing the interval so that it doesn't hold the reference
+    setint=null;
+    console.log('interval stopped');
+   })
+</script>
+</html>

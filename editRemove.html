@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body style="background-color: black; color: white;">
+    <ul class="language">
+        <li>javascript</li>
+    </ul>
+</body>
+<script>
+    // edit element 
+  function createli(text){
+    let ul= document.querySelector('.language')
+    let li=document.createElement('li')
+    li.innerHTML=text
+    ul.appendChild(li)
+  }  
+  createli('python')
+  createli('javascript')
+  
+  function newLi(text){
+   let ul = document.querySelector('.language')
+    let li =document.createElement('li')
+    li.appendChild(document.createTextNode(text))
+    ul.appendChild(li)
+   
+  }
+    newLi('java')
+
+// 3rd edit 
+// const ul = document.querySelector('.language')
+// li.outerHTML = '<li>html</li>'
+// ul.appendChild(li)
+  
+// remove element
+const ul = document.querySelector('.language')
+const li = document.querySelector('li')
+ul.removeChild(li)
+
+    
+</script>
+</html>
