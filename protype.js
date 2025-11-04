@@ -53,7 +53,4 @@ let myheros=['thor','spiderman']
 let heropower={
     thor:'hammer',
     spiderman:'web'
-    
-
 }
-
