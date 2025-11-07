@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OptiVision - Premium Eyewear</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        /* Header */
+        header {
+            background: #fff;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .top-bar {
+            background: #2e3192;
+            color: #fff;
+            padding: 8px 0;
+            font-size: 14px;
+        }
+
+        .top-bar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 50px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: #066eed;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #066eed;
+        }
+
+        .nav-icons {
+            display: flex;
+            gap: 20px;
+            font-size: 20px;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #066eed 0%, #2e3192 100%);
+            color: #fff;
+            padding: 80px 50px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 20px;
+            margin-bottom: 30px;
+        }
+
+        .btn {
+            background: #fdef08;
+            color: #2e3192;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 30px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Section */
+        .section {
+            padding: 60px 20px;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-header h2 {
+            font-size: 36px;
+            color: #2e3192;
+            margin-bottom: 10px;
+        }
+
+        .section-header p {
+            color: #666;
+            font-size: 16px;
+        }
+
+        /* Product Grid */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .product-card {
+            background: #fff;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 250px;
+            background: #f5f5f5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .product-image img {
+            max-width: 80%;
+            max-height: 80%;
+            object-fit: contain;
+        }
+
+        .badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: #fdef08;
+            color: #2e3192;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .product-info {
+            padding: 20px;
+        }
+
+        .product-info h3 {
+            color: #2e3192;
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+
+        .product-info p {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .price {
+            font-size: 22px;
+            font-weight: bold;
+            color: #066eed;
+        }
+
+        .colors {
+            display: flex;
+            gap: 8px;
+            margin-top: 10px;
+        }
+
+        .color-dot {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            border: 2px solid #ddd;
+            cursor: pointer;
+        }
+
+        /* Category Banners */
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .category-card {
+            position: relative;
+            height: 300px;
+            border-radius: 15px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .category-card:hover {
+            transform: scale(1.05);
+        }
+
+        .category-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .category-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(46,49,146,0.9), transparent);
+            padding: 30px;
+            color: #fff;
+        }
+
+        .category-overlay h3 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        /* Frame Shape Section */
+        .frame-shapes {
+            background: #f9f9f9;
+        }
+
+        .shape-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 20px;
+            text-align: center;
+        }
+
+        .shape-item {
+            padding: 20px;
+            background: #fff;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .shape-item:hover {
+            background: #066eed;
+            color: #fff;
+            transform: translateY(-5px);
+        }
+
+        .shape-icon {
+            font-size: 40px;
+            margin-bottom: 10px;
+        }
+
+        /* Features Section */
+        .features {
+            background: linear-gradient(135deg, #2e3192 0%, #066eed 100%);
+            color: #fff;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+        }
+
+        .feature-item {
+            text-align: center;
+        }
+
+        .feature-icon {
+            font-size: 50px;
+            margin-bottom: 20px;
+            color: #fdef08;
+        }
+
+        .feature-item h3 {
+            margin-bottom: 10px;
+            font-size: 22px;
+        }
+
+        /* Testimonials */
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .testimonial-card {
+            background: #fff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .testimonial-card img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin-bottom: 20px;
+        }
+
+        .stars {
+            color: #fdef08;
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+
+        /* Newsletter */
+        .newsletter {
+            background: #fdef08;
+            text-align: center;
+            padding: 60px 20px;
+        }
+
+        .newsletter h2 {
+            color: #2e3192;
+            margin-bottom: 20px;
+            font-size: 36px;
+        }
+
+        .newsletter-form {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .newsletter-form input {
+            flex: 1;
+            padding: 15px 20px;
+            border: none;
+            border-radius: 30px;
+            font-size: 16px;
+        }
+
+        .newsletter-form button {
+            background: #066eed;
+            color: #fff;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 30px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        /* Footer */
+        footer {
+            background: #2e3192;
+            color: #fff;
+            padding: 60px 20px 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto 40px;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 20px;
+            color: #fdef08;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-section a {
+            color: #fff;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: #fdef08;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-icons a {
+            width: 40px;
+            height: 40px;
+            background: #066eed;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s;
+        }
+
+        .social-icons a:hover {
+            background: #fdef08;
+            color: #2e3192;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 32px;
+            }
+
+            .product-grid {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            }
+
+            .newsletter-form {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="top-bar">
+            <div class="container">
+                <div>📞 Call Us: +92-XXX-XXXXXXX | 📧 info@optivision.com</div>
+                <div>Free Shipping on Orders Over $50</div>
+            </div>
+        </div>
+        <nav>
+            <div class="logo">OptiVision</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#eyeglasses">Eyeglasses</a></li>
+                <li><a href="#sunglasses">Sunglasses</a></li>
+                <li><a href="#brands">Brands</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="nav-icons">
+                <span>🔍</span>
+                <span>❤️</span>
+                <span>🛒</span>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>Premium Eyewear Collection</h1>
+        <p>Discover the perfect frames that match your style</p>
+        <button class="btn">Shop Now</button>
+    </section>
+
+    <!-- Featured Products -->
+    <section class="section" id="eyeglasses">
+        <div class="container">
+            <div class="section-header">
+                <h2>Featured Eyeglasses</h2>
+                <p>Explore our curated collection of premium eyewear</p>
+            </div>
+            <div class="product-grid">
+                <div class="product-card">
+                    <div class="product-image">
+                        <div class="badge">New</div>
+                        <svg width="150" height="60" viewBox="0 0 150 60">
+                            <rect x="10" y="15" width="130" height="30" rx="15" fill="none" stroke="#2e3192" stroke-width="3"/>
+                            <line x1="10" y1="30" x2="0" y2="30" stroke="#2e3192" stroke-width="2"/>
+                            <line x1="140" y1="30" x2="150" y2="30" stroke="#2e3192" stroke-width="2"/>
+                        </svg>
+                    </div>
+                    <div class="product-info">
+                        <h3>Classic Aviator</h3>
+                        <p>Timeless design with modern comfort</p>
+                        <div class="price">$89.99</div>
+                        <div class="colors">
+                            <div class="color-dot" style="background: #000"></div>
+                            <div class="color-dot" style="background: #8B4513"></div>
+                            <div class="color-dot" style="background: #C0C0C0"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">
+                        <svg width="150" height="60" viewBox="0 0 150 60">
+                            <rect x="10" y="15" width="130" height="30" rx="5" fill="none" stroke="#066eed" stroke-width="3"/>
+                            <line x1="10" y1="30" x2="0" y2="30" stroke="#066eed" stroke-width="2"/>
+                            <line x1="140" y1="30" x2="150" y2="30" stroke="#066eed" stroke-width="2"/>
+                        </svg>
+                    </div>
+                    <div class="product-info">
+                        <h3>Modern Square</h3>
+                        <p>Bold statement frames for professionals</p>
+                        <div class="price">$99.99</div>
+                        <div class="colors">
+                            <div class="color-dot" style="background: #000"></div>
+                            <div class="color-dot" style="background: #066eed"></div>
+                            <div class="color-dot" style="background: #8B4513"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">
+                        <div class="badge">Sale</div>
+                        <svg width="150" height="60" viewBox="0 0 150 60">
+                            <ellipse cx="40" cy="30" rx="30" ry="20" fill="none" stroke="#2e3192" stroke-width="3"/>
+                            <ellipse cx="110" cy="30" rx="30" ry="20" fill="none" stroke="#2e3192" stroke-width="3"/>
+                            <line x1="10" y1="30" x2="0" y2="30" stroke="#2e3192" stroke-width="2"/>
+                            <line x1="140" y1="30" x2="150" y2="30" stroke="#2e3192" stroke-width="2"/>
+                            <line x1="70" y1="30" x2="80" y2="30" stroke="#2e3192" stroke-width="3"/>
+                        </svg>
+                    </div>
+                    <div class="product-info">
+                        <h3>Round Vintage</h3>
+                        <p>Retro style meets contemporary elegance</p>
+                        <div class="price">$79.99</div>
+                        <div class="colors">
+                            <div class="color-dot" style="background: #FFD700"></div>
+                            <div class="color-dot" style="background: #C0C0C0"></div>
+                            <div class="color-dot" style="background: #8B4513"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">
+                        <svg width="150" height="60" viewBox="0 0 150 60">
+                            <path d="M 10 30 Q 40 10, 70 30" fill="none" stroke="#066eed" stroke-width="3"/>
+                            <path d="M 80 30 Q 110 10, 140 30" fill="none" stroke="#066eed" stroke-width="3"/>
+                            <line x1="10" y1="30" x2="0" y2="30" stroke="#066eed" stroke-width="2"/>
+                            <line x1="140" y1="30" x2="150" y2="30" stroke="#066eed" stroke-width="2"/>
+                            <line x1="70" y1="30" x2="80" y2="30" stroke="#066eed" stroke-width="3"/>
+                        </svg>
+                    </div>
+                    <div class="product-info">
+                        <h3>Cat Eye Chic</h3>
+                        <p>Fashionable frames with unique flair</p>
+                        <div class="price">$94.99</div>
+                        <div class="colors">
+                            <div class="color-dot" style="background: #FF1493"></div>
+                            <div class="color-dot" style="background: #000"></div>
+                            <div class="color-dot" style="background: #8B0000"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories -->
+    <section class="section" style="background: #f9f9f9;">
+        <div class="container">
+            <div class="section-header">
+                <h2>Shop by Category</h2>
+                <p>Find the perfect style for every occasion</p>
+            </div>
+            <div class="category-grid">
+                <div class="category-card">
+                    <div style="width: 100%; height: 100%; background: linear-gradient(135deg, #066eed, #2e3192); display: flex; align-items: center; justify-content: center;">
+                        <div style="text-align: center; color: #fff;">
+                            <div style="font-size: 80px; margin-bottom: 20px;">👓</div>
+                            <h3 style="font-size: 28px;">Eyeglasses</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="category-card">
+                    <div style="width: 100%; height: 100%; background: linear-gradient(135deg, #fdef08, #FFA500); display: flex; align-items: center; justify-content: center;">
+                        <div style="text-align: center; color: #2e3192;">
+                            <div style="font-size: 80px; margin-bottom: 20px;">🕶️</div>
+                            <h3 style="font-size: 28px;">Sunglasses</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="category-card">
+                    <div style="width: 100%; height: 100%; background: linear-gradient(135deg, #2e3192, #066eed); display: flex; align-items: center; justify-content: center;">
+                        <div style="text-align: center; color: #fff;">
+                            <div style="font-size: 80px; margin-bottom: 20px;">👶</div>
+                            <h3 style="font-size: 28px;">Kids Frames</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Frame Shapes -->
+    <section class="section frame-shapes">
+        <div class="container">
+            <div class="section-header">
+                <h2>Shop by Frame Shape</h2>
+                <p>Choose the style that suits your face</p>
+            </div>
+            <div class="shape-grid">
+                <div class="shape-item">
+                    <div class="shape-icon">⬜</div>
+                    <div>Square</div>
+                </div>
+                <div class="shape-item">
+                    <div class="shape-icon">⬭</div>
+                    <div>Rectangle</div>
+                </div>
+                <div class="shape-item">
+                    <div class="shape-icon">⭕</div>
+                    <div>Round</div>
+                </div>
+                <div class="shape-item">
+                    <div class="shape-icon">🔶</div>
+                    <div>Oval</div>
+                </div>
+                <div class="shape-item">
+                    <div class="shape-icon">🔺</div>
+                    <div>Cat Eye</div>
+                </div>
+                <div class="shape-item">
+                    <div class="shape-icon">✈️</div>
+                    <div>Aviator</div>
+                </div>
+                <div class="shape-item">
+                    <div class="shape-icon">👁️</div>
+                    <div>Browline</div>
+                </div>
+                <div class="shape-item">
+                    <div class="shape-icon">🎯</div>
+                    <div>Geometric</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section class="section features">
+        <div class="container">
+            <div class="section-header" style="color: #fff;">
+                <h2 style="color: #fdef08;">Why Choose OptiVision?</h2>
+                <p style="color: #fff;">Quality eyewear with exceptional service</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-item">
+                    <div class="feature-icon">🚚</div>
+                    <h3>Free Shipping</h3>
+                    <p>On all orders over $50</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">🔄</div>
+                    <h3>Easy Returns</h3>
+                    <p>30-day return policy</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">💳</div>
+                    <h3>Secure Payment</h3>
+                    <p>100% secure checkout</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">👥</div>
+                    <h3>Expert Support</h3>
+                    <p>24/7 customer service</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="section" id="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <h2>What Our Customers Say</h2>
+                <p>Real reviews from real people</p>
+            </div>
+            <div class="testimonial-grid">
+                <div class="testimonial-card">
+                    <div style="width: 80px; height: 80px; background: linear-gradient(135deg, #066eed, #2e3192); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 32px; margin-bottom: 20px;">😊</div>
+                    <div class="stars">⭐⭐⭐⭐⭐</div>
+                    <p>"Amazing quality and fast delivery! The frames fit perfectly and look even better than the photos."</p>
+                    <strong>- Sarah K.</strong>
+                </div>
+                <div class="testimonial-card">
+                    <div style="width: 80px; height: 80px; background: linear-gradient(135deg, #fdef08, #FFA500); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #2e3192; font-size: 32px; margin-bottom: 20px;">👨</div>
+                    <div class="stars">⭐⭐⭐⭐⭐</div>
+                    <p>"Best online eyewear shopping experience! Customer service was incredibly helpful."</p>
+                    <strong>- Michael R.</strong>
+                </div>
+                <div class="testimonial-card">
+                    <div style="width: 80px; height: 80px; background: linear-gradient(135deg, #2e3192, #066eed); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 32px; margin-bottom: 20px;">👩</div>
+                    <div class="stars">⭐⭐⭐⭐⭐</div>
+                    <p>"Love my new glasses! Great quality at affordable prices. Will definitely shop here again."</p>
+                    <strong>- Emily T.</strong>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="newsletter">
+        <h2>Stay Updated</h2>
+        <p style="color: #2e3192; margin-bottom: 30px; font-size: 18px;">Subscribe to get special offers and new arrivals</p>
+        <form class="newsletter-form">
+            <input type="email" placeholder="Enter your email address" required>
+            <button type="submit">Subscribe</button>
+        </form>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>About Us</h3>
+                <p>OptiVision is your trusted destination for premium eyewear. We combine style, quality, and affordability.</p>
+                <div class="social-icons">
+                    <a href="#">f</a>
+                    <a href="#">t</a>
+                    <a href="#">i</a>
+                    <a href="#">y</a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Contact</a></li>
+                    <li><a href="#">FAQs</a></li>
+                    <li><a href="#">Shipping Info</a></li>
+                    <li><a href="#">Returns</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Customer Service</h3>
+                <ul>
+                    <li><a href="#">Track Order</a></li>
+                    <li><a href="#">Size Guide</a></li>
+                    <li><a href="#">Virtual Try-On</a></li>
+                    <li><a href="#">Prescription Guide</a></li>
+                    <li><a href="#">Warranty</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact Info</h3>
+                <ul>
+                    <li>📍 123 Vision Street, Islamabad</li>
+                    <li>📞 +92-XXX-XXXXXXX</li>
+                    <li>📧 info@optivision.com</li>
+                    <li>🕐 Mon-Sat: 9AM - 8PM</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 OptiVision. All rights reserved. | Privacy Policy | Terms & Conditions</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add to cart animation
+        document.querySelectorAll('.product-card').forEach(card => {
+            card.addEventListener('click', function() {
+                this.style.transform = 'scale(0.98)';
+                setTimeout(() => {
+                    this.style.transform = '';
+                }, 200);
+            });
+        });
+
+        // Newsletter form submission
+        document.querySelector('.newsletter-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = this.querySelector('input[type="email"]').value;
+            alert('Thank you for subscribing! We\'ll send updates to: ' + email);
+            this.reset();
+        });
+
+        // Color dot selection
+        document.querySelectorAll('.color-dot').forEach(dot => {
+            dot.addEventListener('click', function(e) {
+                e.stopPropagation();
+                this.parentElement.querySelectorAll('.color-dot').forEach(d => {
+                    d.style.transform = 'scale(1)';
+                    d.style.border = '2px solid #ddd';
+                });
+                this.style.transform = 'scale(1.2)';
+                this.style.border = '3px solid #066eed';
+            });
+        });
+
+        // Shape item hover effect
+        document.querySelectorAll('.shape-item').forEach(item => {
+            item.addEventListener('click', function() {
+                document.querySelectorAll('.shape-item').forEach(i => {
+                    i.style.background = '#fff';
+                    i.style.color = '#333';
+                });
+                this.style.background = '#066eed';
+                this.style.color = '#fff';
+            });
+        });
+
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all product cards and category cards
+        document.querySelectorAll('.product-card, .category-card, .testimonial-card, .feature-item').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'all 0.6s ease-out';
+            observer.observe(el);
+        });
+
+        // Mobile menu toggle (if needed)
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.boxShadow = '0 5px 20px rgba(0,0,0,0.15)';
+            } else {
+                header.style.boxShadow = '0 2px 10px rgba(0,0,0,0.1)';
+            }
+        });
+
+        // Cart icon animation on click
+        document.querySelector('.nav-icons').addEventListener('click', function(e) {
+            if (e.target.textContent === '🛒') {
+                e.target.style.transform = 'scale(1.3)';
+                setTimeout(() => {
+                    e.target.style.transform = 'scale(1)';
+                }, 200);
+                alert('Cart feature coming soon!');
+            }
+        });
+
+        // Initialize animations on page load
+        window.addEventListener('load', function() {
+            document.querySelectorAll('.product-card, .category-card').forEach((el, index) => {
+                setTimeout(() => {
+                    el.style.opacity = '1';
+                    el.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
+        });
+    </script>
+</body>
+</html>
