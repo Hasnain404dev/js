@@ -93,7 +93,7 @@ const TAsupport={
 // console.log(TAsupport)
 
 // moder syntax
-
+// teachingsupport inherit the properties of teacher every property that teacher have the the teaching support also have
 Object.setPrototypeOf(teachingsupport,teacher)
 console.log(teachingsupport.isAvailabel)
 
@@ -106,6 +106,7 @@ String.prototype.lengthfunction=function(){
 Username.lengthfunction()
 'manu     '.lengthfunction()
 'Hasnain   '.lengthfunction()
+
 
 
 
